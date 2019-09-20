@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Page;
+use App\Page as Page;
 use Illuminate\Http\Request;
 use App\ContentBlockTypes as Type;
 
@@ -23,11 +23,16 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function create()
     {
         //
-        $type = Type::all();
-        return view('pages.create')->with('types', $type);
+
+        $page = new Page();
+        $page->save();
+        return redirect()->route('page.edit', $page->id);
     }
 
     /**
@@ -60,7 +65,10 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        //
+
+        $type = Type::all();
+        $blocks = Page::find($page->id)->blocks;
+        return view('pages.edit')->with(['types' => $type, 'page' => $page->id, 'blocks' => $blocks]);
     }
 
     /**

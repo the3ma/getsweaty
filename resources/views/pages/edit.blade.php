@@ -6,6 +6,20 @@
 @section('content')
     <div class="container mt-5">
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @foreach ($blocks as $block)
+        {{$block}}
+        <hr/>
+        @endforeach
+
         @if($types)
         <!-- add BLockContent -->
         <div class="dropdown">
@@ -13,15 +27,15 @@
                 +
             </a>
             <div class="dropdown-menu" aria-labelledby="BlockContent">
-                <form action="{{ route('pageblock.store')}}" method="post">
-                    @csrf
-                    @method('POST')
                     @foreach ($types as $type)
+                        <form action="{{ route('pageblock.store')}}" method="post">
+                            @csrf
+                            @method('POST')
                             <input type="hidden" name="type" value="{{ $type->id }}">
                             <input type="hidden" name="page" value="{{ $page }}">
                             <button class="btn btn-danger" type="submit">{{ $type->name }}</button>
+                        </form>
                     @endforeach
-                </form>
             </div>
         </div>
         @endif

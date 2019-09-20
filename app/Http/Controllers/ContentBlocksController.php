@@ -14,7 +14,8 @@ class ContentBlocksController extends Controller
      */
     public function index()
     {
-        //
+        $block = ContentBlocks::all();
+        echo $block;
     }
 
     /**
@@ -44,9 +45,11 @@ class ContentBlocksController extends Controller
      * @param  \App\ContentBlocks  $contentBlocks
      * @return \Illuminate\Http\Response
      */
-    public function show(ContentBlocks $contentBlocks)
+    public function show(ContentBlocks $contentBlocks, $id)
     {
         //
+        $block = ContentBlocks::find($id)->type;
+        echo $block;
     }
 
     /**

@@ -15,10 +15,10 @@ class CreateContentBlocksTable extends Migration
     {
         Schema::create('content_blocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('content_block_types')->onDelete('cascade');
-            $table->json('content');
+            $table->json('content')->nullable();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
