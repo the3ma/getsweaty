@@ -56,6 +56,7 @@ class PageBlockController extends Controller
         $block->type_id = $request->type;
         //save block
         $block->save();
+        dd($block);
         //create bolck in page
         $blockInPage = new BlockInPage();
         $blockInPage->page_id = $request->page;
